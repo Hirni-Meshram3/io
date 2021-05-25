@@ -783,3 +783,30 @@ jobs:
           python --version
           bash -x -e tools/docker/tests/dockerfile_nightly_test.sh
           docker push tfsigio/tfio:nightly
+  test-aarch64:
+    name: "Wheel ${{ matrix.pyver }} aarch64"
+    strategy:
+      matrix:
+        pyver: [cp36-cp36m, cp37-cp37m, cp38-cp38, cp39-cp39]
+        arch: [aarch64]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    env:
+      py: /opt/python/${{ matrix.pyver }}/bin/python
+      img: quay.io/pypa/manylinux2014_${{ matrix.arch }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install dependencies
+      run: |
+            docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+            ${{ env.img }} \
+            bash -exc '${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
+            source .env/bin/activate && \
+            python setup.py --project tensorflow-io --data bazel-bin -q bdist_wheel && \
+            python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel && \
+            ls dist/* && \
+            deactivate'
