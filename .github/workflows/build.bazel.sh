@@ -19,8 +19,14 @@ export TENSORFLOW_INSTALL="$(python3 setup.py --install-require)"
 
 export BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
 export BAZEL_VERSION=$(cat .bazelversion)
-curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
-bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+if [ `uname -m` == "aarch64" ]; then
+   curl -sSOL https://github.com/bazelbuild/bazel/releases/download/3.6.0/bazel-3.6.0-linux-arm64
+   bash -e bazel-3.6.0-linux-arm64
+else
+   curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+   bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh 
+fi
+
 bazel version
 
 python3 -m pip --version
