@@ -811,6 +811,7 @@ jobs:
             bash -x -e .github/workflows/build.bazel.sh && \
             sudo cp .bazelrc build/tensorflow_io/ && \
             mv bazel-bin/tensorflow_io/.bazelrc . && \
+            pip install wheel && \
             python setup.py --project tensorflow-io --data bazel-bin -q bdist_wheel && \
             python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel && \
             ls dist/* && \
