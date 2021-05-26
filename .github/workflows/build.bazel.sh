@@ -20,7 +20,7 @@ export TENSORFLOW_INSTALL="$(python3 setup.py --install-require)"
 export BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
 export BAZEL_VERSION=$(cat .bazelversion)
 if [ `uname -m` == "aarch64" ]; then
-   wget -o /usr/bin/bazel https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64
+   wget -o /usr/bin/bazel "https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64"
    sudo chmod u+x /usr/bin/bazel
    bazel info release
 else
