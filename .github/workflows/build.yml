@@ -38,15 +38,15 @@ jobs:
             source .env/bin/activate && \
             yum install -y sudo && \
             sudo yum -y install wget && \
-            #set -x -e && \
-            #export BAZEL_OPTIMIZATION="--config=optimization --config=linux_ci --config=cache" && \
-            #bash -x -e .github/workflows/build.bazel.sh && \
-            #sudo cp .bazelrc build/tensorflow_io/ && \
-            #mv bazel-bin/tensorflow_io/.bazelrc . && \
-            curl -f -s -L -R -o "./install" "https://github.com/bazelbuild/bazel/releases/download/3.6.0/bazel-3.6.0-linux-arm64"
-            sudo cp ./install /usr/local/bin/bazel && \
-            sudo chmod u+x /usr/local/bin/bazel && \
-            sudo bazel info release && \
+            set -x -e && \
+            export BAZEL_OPTIMIZATION="--config=optimization --config=linux_ci --config=cache" && \
+            bash -x -e .github/workflows/build.bazel.sh && \
+            sudo cp .bazelrc build/tensorflow_io/ && \
+            mv bazel-bin/tensorflow_io/.bazelrc . && \
+            #curl -f -s -L -R -o "./install" "https://github.com/bazelbuild/bazel/releases/download/3.6.0/bazel-3.6.0-linux-arm64"
+            #sudo cp ./install /usr/local/bin/bazel && \
+            #sudo chmod u+x /usr/local/bin/bazel && \
+            #sudo bazel info release && \
             pip install wheel && \
             python setup.py --project tensorflow-io --data bazel-bin -q bdist_wheel && \
             python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel && \
