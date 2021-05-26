@@ -36,8 +36,8 @@ jobs:
             ${{ env.img }} \
             bash -exc '${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
-            apt-get install sudo && \
-            sudo apt-get install wget && \
+            yum install -y sudo && \
+            sudo yum -y install wget && \
             set -x -e && \
             export BAZEL_OPTIMIZATION="--config=optimization --config=linux_ci --config=cache" && \
             bash -x -e .github/workflows/build.bazel.sh && \
