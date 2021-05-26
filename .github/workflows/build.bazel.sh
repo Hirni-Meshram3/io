@@ -22,7 +22,7 @@ export BAZEL_VERSION=$(cat .bazelversion)
 if [ `uname -m` == "aarch64" ]; then
    wget -o /usr/bin/bazel "https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64"
    sudo chmod u+x /usr/bin/bazel
-   bazel info release
+   #bazel info release
 else
    curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
    bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh 
