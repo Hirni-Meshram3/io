@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Copyright 2018 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +18,13 @@ set -e -x
 
 export TENSORFLOW_INSTALL="$(python3 setup.py --install-require)"
 
-export BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
-export BAZEL_VERSION=$(cat .bazelversion)
+#export BAZEL_OS=$(uname | tr '[:upper:]' '[:lower:]')
+#export BAZEL_VERSION=$(cat .bazelversion)
 if [ `uname -m` == "aarch64" ]; then
-   wget -o /usr/local/bin/bazel "https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64"
-   sudo chmod u+x /usr/bin/bazel
+   sudo wget -o /usr/local/bin/bazel "https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64"
+   sudo chmod u+x /usr/local/bin/bazel
 else
-   curl -sSOL https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh
+   curl -sSOL https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-installer-linux-x86_64.sh
    bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh 
 fi
 bazel info release
