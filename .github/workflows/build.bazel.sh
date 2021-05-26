@@ -27,7 +27,6 @@ else
    curl -sSOL https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-installer-linux-x86_64.sh
    bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh 
 fi
-bazel info release
 echo "/usr/local/bin/bazel" > /dev/null
 find bazel
 bazel version
