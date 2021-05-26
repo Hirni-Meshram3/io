@@ -38,13 +38,13 @@ jobs:
             source .env/bin/activate && \
             yum install -y sudo && \
             sudo yum -y install wget && \
-            set -x -e && \
-            export BAZEL_OPTIMIZATION="--config=optimization --config=linux_ci --config=cache" && \
-            bash -x -e .github/workflows/build.bazel.sh && \
-            sudo cp .bazelrc build/tensorflow_io/ && \
-            mv bazel-bin/tensorflow_io/.bazelrc . && \
+            #set -x -e && \
+            #export BAZEL_OPTIMIZATION="--config=optimization --config=linux_ci --config=cache" && \
+            #bash -x -e .github/workflows/build.bazel.sh && \
+            #sudo cp .bazelrc build/tensorflow_io/ && \
+            #mv bazel-bin/tensorflow_io/.bazelrc . && \
             pip install wheel && \
-            python setup.py --project tensorflow-io --data bazel-bin -q bdist_wheel && \
-            python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel && \
+            python setup.py --project tensorflow-io -q bdist_wheel && \
+            python setup.py --project tensorflow-io-gcs-filesystem -q bdist_wheel && \
             ls dist/* && \
             deactivate'
