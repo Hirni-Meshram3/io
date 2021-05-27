@@ -30,7 +30,7 @@ else
    curl -sSOL https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-installer-linux-x86_64.sh
    bash -e bazel-${BAZEL_VERSION}-installer-${BAZEL_OS}-x86_64.sh 
 fi
-bazel version
+#bazel version
 
 python3 -m pip --version
 
