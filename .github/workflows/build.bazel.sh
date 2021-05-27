@@ -38,7 +38,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade setuptools
 python3 -m pip --version
 
-python3 -m pip install -q ${TENSORFLOW_INSTALL}
+#python3 -m pip install -q ${TENSORFLOW_INSTALL}
 
 python3 tools/build/configure.py
 
